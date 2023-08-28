@@ -15,4 +15,6 @@ model User {
   userDocument    String
   creditCardToken String
   value           Int
+
+  @@map("users")
 }
