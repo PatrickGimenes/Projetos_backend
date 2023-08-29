@@ -2,8 +2,6 @@
 /dist
 /node_modules
 
-#Database
-/prisma/dev.db
 
 # Logs
 logs
