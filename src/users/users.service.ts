@@ -27,7 +27,16 @@ export class UsersService {
   }
 
   async findOne(id: string) {
-    return `This action returns a #${id} user`;
+    const bookExist = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (!bookExist) {
+      throw new Error('User does not exists!');
+    }
+
+    return bookExist;
   }
 
   async update(id: string, data: UserDto) {
