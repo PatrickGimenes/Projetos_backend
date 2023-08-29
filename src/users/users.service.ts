@@ -2,11 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { UserDto } from './dto/user.dto';
 import { PrismaClient } from '@prisma/client';
 import { PrismaService } from 'src/database/prisma.service';
+import { encode } from 'src/utils/bcrypt';
 
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
+
   async create(data: UserDto) {
+    const document = await encode(data.userDocument);
+    const token = await encode(data.creditCardToken);
+    data.userDocument = document;
+    data.creditCardToken = token;
+
     const userExist = await this.prisma.user.findFirst({
       where: {
         userDocument: data.userDocument,
@@ -40,6 +47,10 @@ export class UsersService {
   }
 
   async update(id: string, data: UserDto) {
+    const document = await encode(data.userDocument);
+    const token = await encode(data.creditCardToken);
+    data.userDocument = document;
+    data.creditCardToken = token;
     const bookExist = await this.prisma.user.findUnique({
       where: {
         id,
