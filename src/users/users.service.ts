@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UserDto } from './dto/user.dto';
 import { PrismaClient } from '@prisma/client';
 import { PrismaService } from 'src/database/prisma.service';
 
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
-  async create(data: CreateUserDto) {
+  async create(data: UserDto) {
     const userExist = await this.prisma.user.findFirst({
       where: {
         userDocument: data.userDocument,
@@ -23,19 +22,32 @@ export class UsersService {
     return user;
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll() {
+    return await this.prisma.user.findMany();
   }
 
-  findOne(id: number) {
+  async findOne(id: string) {
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, data: UserDto) {
+    const bookExist = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (!bookExist) {
+      throw new Error('User does not exists!');
+    }
+    return await this.prisma.user.update({
+      data,
+      where: {
+        id,
+      },
+    });
   }
 
-  remove(id: number) {
+  async remove(id: string) {
     return `This action removes a #${id} user`;
   }
 }

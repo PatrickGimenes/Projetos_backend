@@ -1,4 +1,4 @@
-export class CreateUserDto {
+export class UserDto {
   id?: string;
   userDocument: string;
   creditCardToken: string;
