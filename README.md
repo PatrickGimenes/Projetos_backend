@@ -1,8 +1,7 @@
 # Senha segura
-Continuando meu aprendizado, implementei a solução para esse <a href="https://github.com/backend-br/desafios/blob/master/secure-password/PROBLEM.md">desafio</a>, 
-cujo objetivo era criar um serviço que valide se uma senha é considerada segura com base em critérios pré-definidos.
+Continuando meu aprendizado, implementei a solução para este <a href="https://github.com/backend-br/desafios/blob/master/secure-password/PROBLEM.md">desafio</a> cujo objetivo era criar um serviço que valida se uma senha é considerada segura com base em critérios pré-definidos.
 
-O README do desafio fornece o seguintes requisitos:
+O README do desafio fornece os seguintes requisitos:
 
 ### Exemplo
 
