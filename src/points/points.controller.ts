@@ -26,16 +26,16 @@ export class PointsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.pointsService.findOne(+id);
+    return this.pointsService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePointDto: CreatePointDto) {
-    return this.pointsService.update(+id, updatePointDto);
+    return this.pointsService.update(id, updatePointDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.pointsService.remove(+id);
+    return this.pointsService.remove(id);
   }
 }

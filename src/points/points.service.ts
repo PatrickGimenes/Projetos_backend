@@ -5,23 +5,65 @@ import { PrismaService } from 'src/database/prisma';
 @Injectable()
 export class PointsService {
   constructor(private prisma: PrismaService) {}
-  create(createPointDto: CreatePointDto) {
-    return 'This action adds a new point';
+  async create(data: CreatePointDto) {
+    const point = await this.prisma.pOI.create({
+      data,
+    });
+    return point;
   }
 
-  findAll() {
-    return this.prisma.pOI.findMany();
+  async findAll() {
+    return await this.prisma.pOI.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} point`;
+  async findOne(id: string) {
+    const pointExist = await this.prisma.pOI.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!pointExist) {
+      throw new Error('Poi does not exist');
+    }
+
+    return pointExist;
   }
 
-  update(id: number, updatePointDto: CreatePointDto) {
-    return `This action updates a #${id} point`;
+  async update(id: string, data: CreatePointDto) {
+    const pointExist = await this.prisma.pOI.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!pointExist) {
+      throw new Error('Poi does not exist');
+    }
+
+    return await this.prisma.pOI.update({
+      data,
+      where: {
+        id,
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} point`;
+  async remove(id: string) {
+    const pointExist = await this.prisma.pOI.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!pointExist) {
+      throw new Error('Poi does not exist');
+    }
+
+    return this.prisma.pOI.delete({
+      where: {
+        id,
+      },
+    });
   }
 }
