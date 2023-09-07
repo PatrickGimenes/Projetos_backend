@@ -25,7 +25,7 @@ export class PointsController {
     return this.pointsService.findAll();
   }
 
-  @Post('poi')
+  @Post('points')
   findPOI(@Body() poi: Point) {
     return this.pointsService.findPOI(poi);
   }
