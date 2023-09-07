@@ -1,9 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePointDto } from './dto/create-point.dto';
 import { PrismaService } from 'src/database/prisma';
+import { Point } from './entities/point.entity';
 
 @Injectable()
 export class PointsService {
+  async findPOI(id: Point) {
+    console.log(id.X);
+    console.log(id.Y);
+
+    return id;
+  }
   constructor(private prisma: PrismaService) {}
   async create(data: CreatePointDto) {
     const point = await this.prisma.pOI.create({

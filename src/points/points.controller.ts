@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { PointsService } from './points.service';
 import { CreatePointDto } from './dto/create-point.dto';
+import { Point } from './entities/point.entity';
 
 @Controller('points')
 export class PointsController {
@@ -24,11 +25,15 @@ export class PointsController {
     return this.pointsService.findAll();
   }
 
+  @Post('poi')
+  findPOI(@Body() poi: Point) {
+    return this.pointsService.findPOI(poi);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.pointsService.findOne(id);
   }
-
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePointDto: CreatePointDto) {
     return this.pointsService.update(id, updatePointDto);
