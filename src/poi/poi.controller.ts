@@ -1,7 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { PoiService } from './poi.service';
 import { CreatePoiDto } from './dto/create-poi.dto';
-import { UpdatePoiDto } from './dto/update-poi.dto';
 
 @Controller('poi')
 export class PoiController {
@@ -19,16 +26,16 @@ export class PoiController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.poiService.findOne(+id);
+    return this.poiService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePoiDto: UpdatePoiDto) {
-    return this.poiService.update(+id, updatePoiDto);
+  update(@Param('id') id: string, @Body() data: CreatePoiDto) {
+    return this.poiService.update(id, data);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.poiService.remove(+id);
+    return this.poiService.remove(id);
   }
 }
