@@ -6,19 +6,13 @@ import { Point } from './entities/point.entity';
 @Injectable()
 export class PointsService {
   async findPOI(id: Point) {
-    const _X = id.X + id.distance;
-    const _Y = id.Y + id.distance;
-
     const points = await this.prisma.pOI.findMany({
       where: {
         X: {
-          lt: _X,
-          gt: id.X - id.distance,
+          gte: id.X - id.distance,
+          lte: id.X + id.distance,
         },
-        Y: {
-          lt: _Y,
-          gt: id.Y - id.distance,
-        },
+        Y: { gte: id.Y - id.distance, lte: id.Y + id.distance },
       },
     });
 
