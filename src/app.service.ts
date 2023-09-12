@@ -15,9 +15,9 @@ export class AppService {
     // Empréstimo consignado: Taxa de juros de 2%.
     // Empréstimo com garantia: Taxa de juros de 3%.
     if (
-      data.income >= 3000 &&
-      data.income <= 5000 &&
-      data.location === 'SP' &&
+      data.income >= 3000 ||
+      data.income <= 5000 ||
+      data.location === 'SP' ||
       +data.age <= 30
     ) {
       loans.push({
@@ -35,9 +35,9 @@ export class AppService {
       loans.push({ type: 'GUARANTEED', interest_rate: 3 });
     }
     if (
-      data.income >= 3000 &&
-      data.income <= 5000 &&
-      data.location === 'SP' &&
+      data.income >= 3000 ||
+      data.income <= 5000 ||
+      data.location === 'SP' ||
       +data.age <= 30
     ) {
       loans.push({
