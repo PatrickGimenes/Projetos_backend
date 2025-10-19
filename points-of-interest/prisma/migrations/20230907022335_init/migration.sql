@@ -1,0 +1,7 @@
+-- CreateTable
+CREATE TABLE "POI" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "name" TEXT NOT NULL,
+    "X" INTEGER NOT NULL,
+    "Y" INTEGER NOT NULL
+);
